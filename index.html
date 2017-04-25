@@ -20,6 +20,9 @@
 
 <div id="content">
 <h1> Matthew Turpin - Online Portfolio </h1>
+	
+<script id="profile-template" type="text/x-handlebars-template">
+
 	<div class="portfolio-content">
     <figure class="portfolio-cover" title="{{this.name}}">
         {{#if this.covers.[404]}}
@@ -40,8 +43,8 @@
         {{/each}}
         </ul>
     </div>
-</div> 
-	
+</div><!-- .portfolio-content --> 
+</script>	
 </div><!-- #content -->
 
 </div><!-- #wrapper -->
