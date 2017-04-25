@@ -4,6 +4,8 @@
 	<title>Matthew Turpin - Online Portfolio</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
 	<script type="text/javascript" src="assets/js/port.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -21,8 +23,14 @@
 <div id="content">
 <h1> Matthew Turpin - Online Portfolio </h1>
 	
-<script id="profile-template" type="text/x-handlebars-template">
 
+<div id="portfolio" class="portfolio-area clearfix">      
+    <script id="portfolio-template" type="text/x-handlebars-template">
+    <ul class="portfolio-list clearfix">
+        {{#each projects}}
+        <li class="portfolio-item">
+	
+	
 	<div class="portfolio-content">
     <figure class="portfolio-cover" title="{{this.name}}">
         {{#if this.covers.[404]}}
@@ -43,8 +51,17 @@
         {{/each}}
         </ul>
     </div>
-</div><!-- .portfolio-content --> 
-</script>	
+</div> 
+	
+	    
+	</li>
+        {{/each}}
+    </ul>
+    </script>
+</div>	
+	
+	
+	
 </div><!-- #content -->
 
 </div><!-- #wrapper -->
