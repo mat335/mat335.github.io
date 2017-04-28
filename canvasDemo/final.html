@@ -1,0 +1,202 @@
+<html>  
+<head>
+<title>Animated</title>  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js" type="text/javascript"></script>
+   
+<style>  
+
+body {  
+	margin:0px;  
+	padding:0px;  
+	text-align:center;  
+}  
+
+canvas{  
+	outline:0;  
+	border:6px solid #B30000;
+	margin:120px auto 0px auto;
+	background-image:url(grass.jpg); 
+	background-repeat:no-repeat;
+}  
+
+</style>  
+
+<link rel="stylesheet" type="text/css" href="http://www.turpindesigns.com/style.css" />
+<link rel="shortcut icon" href="images/favicon.ico" />
+
+</head>  
+
+  
+
+
+<canvas id="canvas" width="1000" height="400"></canvas>	
+
+<script type="text/javascript">
+
+var ctx;
+
+//ball array
+var balls = new Array();
+
+
+
+//store pi variable
+var PI = Math.PI * 2
+
+
+
+//get document element
+function $(id) {
+	return document.getElementById(id);
+}
+
+
+//create ball values and detect canvas edges
+function Ball(x, y, rx, ry) {
+
+	this.x = x;
+	this.y = y;
+	this.rx = rx;
+	this.ry = ry;
+	this.deleted = false;
+
+	this.move = function() {
+
+		if(this.x > 995) {
+			this.x = 995;
+			this.rx = -this.rx;
+		} else if(this.x < 5) {
+			this.x = 5;
+			this.rx = -this.rx;
+		}
+
+		if(this.y > 595) {
+			this.y = 595;
+			this.ry = -this.ry;
+		} else if(this.y < 5) {
+			this.y = 5;
+			this.ry = -this.ry;
+		}
+
+		this.x+= this.rx;
+		this.y+= this.ry;
+		
+		if (this.deleted == true){
+			
+		}
+		else {
+			ctx.beginPath();
+			ctx.arc(this.x, this.y, 10, 0, PI, true);
+			ctx.closePath();
+			ctx.fill();
+		}
+	}
+}
+
+//create balls with loop 
+function createBall() {
+
+	for(var i=0; i<100; i++){
+		x = Math.random() * 1000;
+		y = Math.random() * 400;
+		
+		balls.push(new Ball(x, y, Math.random() * 10 - 3, Math.random() * 10 - 3));	
+	}
+	
+	
+}
+
+//initialize functions
+function init() {
+	ctx = $('canvas').getContext('2d');
+	window.setInterval(animate, 20);
+	
+}
+
+//animate the stage with redrawing elements
+function animate() {
+	ctx.clearRect(0, 0, 1000, 400);
+	fox();
+}
+
+//set variables for elements
+var foxX = 500;
+var foxY = 300;
+var dx = 50;
+var dy = 50;
+var WIDTH = 1000;
+var HEIGHT = 400;
+
+
+//load fox image
+function fox(){
+	var img = new Image();
+	img.onload = function(){
+		ctx.drawImage(img, foxX, foxY);
+
+//set the balls to move.
+	for(var i = 0; i < 100; i++) {
+		balls[i].move();
+		
+		//if balls hit don't hit the image....	
+		if (Math.round(balls[i].x) >  foxX){
+			ctx.fillStyle = 'orange';
+			
+		
+		}
+		else if(Math.round(balls[i].x) < foxX){
+			ctx.fillStyle = 'orange';
+				
+		}
+		//if they do hit.
+		else if (Math.round(balls[i].x) == foxX){
+			ctx.fillStyle = 'black';
+			balls[i].deleted = true;
+			
+		}
+		
+	  }
+	}
+	img.src = 'fox.png';
+}
+
+
+//set key events
+function doKeyDown(evt){
+switch (evt.keyCode) {
+case 38:  /* Up arrow was pressed */
+if (foxY - dy > -20){
+foxY -= dy;
+}
+
+break;
+case 40:  /* Down arrow was pressed */
+if (foxY + dy < 350 ){
+foxY += dy;
+}
+
+break;
+case 37:  /* Left arrow was pressed */
+if (foxX - dx > -20){
+foxX -= dx;
+}
+break;
+case 39:  /* Right arrow was pressed */
+if ((foxX + dx < 900)){
+foxX += dx;
+}
+break;
+}
+}
+
+createBall();
+window.addEventListener('keydown',doKeyDown,true);
+</script>
+
+
+<body onLoad="init()">
+
+</div>
+
+</body>
+</html>
