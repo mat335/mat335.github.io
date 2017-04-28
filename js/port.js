@@ -63,7 +63,7 @@ var userID  = 'mat335d077';
 
     //Header image
 (function() {
-    var behanceUserAPI = 'http://www.behance.net/v2/users/'+ userID +'?callback=?&api_key='+ apiKey;
+    var behanceUserAPI = 'https://www.behance.net/v2/users/'+ userID +'?callback=?&api_key='+ apiKey;
     function setUserTemplate() {
         var userData    = JSON.parse(sessionStorage.getItem('behanceUser')),
         getTemplate = $('#profile-template').html(),
@@ -86,7 +86,7 @@ var userID  = 'mat335d077';
  //Porfolio Images   
  (function() {
     var perPage = 12;
-    var behanceProjectAPI = 'http://www.behance.net/v2/users/'+ userID +'/projects?callback=?&api_key=' + apiKey + '&per_page=' + perPage;
+    var behanceProjectAPI = 'https://www.behance.net/v2/users/'+ userID +'/projects?callback=?&api_key=' + apiKey + '&per_page=' + perPage;
  
     function setPortfolioTemplate() {
         var projectData = JSON.parse(sessionStorage.getItem('behanceProject')),
@@ -111,7 +111,7 @@ var userID  = 'mat335d077';
 $('#portfolio').on('click', '.portfolio-cover', function() {
     var $this = $(this),
         projectID = $this.data('project-id'),
-        beProjectContentAPI = 'http://www.behance.net/v2/projects/'+ projectID +'?callback=?&api_key=' + apiKey,
+        beProjectContentAPI = 'https://www.behance.net/v2/projects/'+ projectID +'?callback=?&api_key=' + apiKey,
         keyName = 'behanceProjectImages-' + projectID;
 
     function showGallery(dataSource) { 
